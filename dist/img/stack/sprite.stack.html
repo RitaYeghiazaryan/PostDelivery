@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+		<title>SVG stack preview | svg-sprite</title>
+		<style>@charset "UTF-8";body{padding:0;margin:0;color:#666;background:#fafafa;font-family:Arial,Helvetica,sans-serif;font-size:1em;line-height:1.4}header{display:block;padding:3em 3em 2em 3em;background-color:#fff}header p{margin:2em 0 0 0}section{border-top:1px solid #eee;padding:2em 3em 0 3em}section ul{margin:0;padding:0}section li{display:inline;display:inline-block;background-color:#fff;position:relative;margin:0 2em 2em 0;vertical-align:top;border:1px solid #ccc;padding:1em 1em 3em 1em;cursor:default}.icon-box{margin:0;width:144px;height:144px;position:relative;background:#ccc url("data:image/gif;base64,R0lGODlhDAAMAIAAAMzMzP///yH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjEgNjQuMTQwOTQ5LCAyMDEwLzEyLzA3LTEwOjU3OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozQjk4OTI0MUY5NTIxMUUyQkJDMEI5NEFEM0Y1QTYwQyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozQjk4OTI0MkY5NTIxMUUyQkJDMEI5NEFEM0Y1QTYwQyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjNCOTg5MjNGRjk1MjExRTJCQkMwQjk0QUQzRjVBNjBDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjNCOTg5MjQwRjk1MjExRTJCQkMwQjk0QUQzRjVBNjBDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAAAAAAAsAAAAAAwADAAAAhaEH6mHmmzcgzJAUG/NVGrfOZ8YLlABADs=") top left repeat;border:1px solid #ccc;display:table-cell;vertical-align:middle;text-align:center}.icon{display:inline;display:inline-block}h1{margin-top:0}h2{margin:0;padding:0;font-size:1em;font-weight:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:absolute;left:1em;right:1em;bottom:1em}footer{display:block;margin:0;padding:0 3em 3em 3em}footer p{margin:0;font-size:.7em}footer a{color:#0f7595;margin-left:0}</style>
+
+<!--
+
+Sprite shape dimensions
+====================================================================================================
+You will need to set the sprite shape dimensions via CSS when you use them as stack SVGs, otherwise
+they would become a huge 100% in size. You may use the following dimension classes for doing so.
+They might well be outsourced to an external stylesheet of course.
+
+-->
+
+<style type="text/css">
+	.svg-barbell-dims { width: 26px; height: 26px; }
+	.svg-basket-dims { width: 280px; height: 280px; }
+	.svg-broadcast-dims { width: 278px; height: 280px; }
+	.svg-calendar-dims { width: 52px; height: 52px; }
+	.svg-chat-dims { width: 66px; height: 66px; }
+	.svg-city-dims { width: 26px; height: 26px; }
+	.svg-clock-dims { width: 52px; height: 52px; }
+	.svg-clockIcon-dims { width: 19px; height: 19px; }
+	.svg-downArrow-dims { width: 12px; height: 7px; }
+	.svg-economy-dims { width: 36px; height: 16px; }
+	.svg-emsPost-dims { width: 52px; height: 52px; }
+	.svg-engFlag-dims { width: 83px; height: 62px; }
+	.svg-fileText-dims { width: 26px; height: 26px; }
+	.svg-globe-dims { width: 26px; height: 26px; }
+	.svg-info-dims { width: 16px; height: 16px; }
+	.svg-littlePackages-dims { width: 52px; height: 52px; }
+	.svg-mailIcon-dims { width: 26px; height: 26px; }
+	.svg-mainFeatureLogo-dims { width: 60px; height: 60px; }
+	.svg-navLogo-dims { width: 190px; height: 48px; }
+	.svg-nextArrow-dims { width: 36px; height: 16px; }
+	.svg-notebook-dims { width: 26px; height: 26px; }
+	.svg-notification-dims { width: 52px; height: 52px; }
+	.svg-operativeDelivery-dims { width: 60px; height: 60px; }
+	.svg-orderPPParallax-dims { width: 408px; height: 406px; }
+	.svg-orderRacet-dims { width: 335px; height: 306px; }
+	.svg-original-dims { width: 60px; height: 60px; }
+	.svg-pointOfExtradicion-dims { width: 280px; height: 280px; }
+	.svg-post-dims { width: 52px; height: 52px; }
+	.svg-pp1-dims { width: 52px; height: 52px; }
+	.svg-pp2-dims { width: 52px; height: 52px; }
+	.svg-pp3-dims { width: 52px; height: 52px; }
+	.svg-pp4-dims { width: 52px; height: 52px; }
+	.svg-pp5-dims { width: 52px; height: 52px; }
+	.svg-prevArrow-dims { width: 36px; height: 16px; }
+	.svg-prodSelection-dims { width: 60px; height: 60px; }
+	.svg-rusFlag-dims { width: 75px; height: 54px; }
+	.svg-searchIcon-dims { width: 32px; height: 32px; }
+	.svg-sliderAccessories-dims { width: 52px; height: 52px; }
+	.svg-sliderClothes-dims { width: 52px; height: 52px; }
+	.svg-sliderCosmetics-dims { width: 52px; height: 52px; }
+	.svg-sliderElectronics-dims { width: 52px; height: 52px; }
+	.svg-sliderForChild-dims { width: 52px; height: 52px; }
+	.svg-sliderSport-dims { width: 52px; height: 52px; }
+	.svg-star-dims { width: 17px; height: 16px; }
+	.svg-stock-dims { width: 280px; height: 280px; }
+	.svg-userLogo-dims { width: 28px; height: 28px; }
+	.svg-viber-dims { width: 66px; height: 66px; }
+	.svg-virtualTour-dims { width: 411px; height: 406px; }
+	.svg-whatsup-dims { width: 66px; height: 66px; }
+	.svg-whiteChat-dims { width: 66px; height: 66px; }
+	.svg-whiteViber-dims { width: 66px; height: 66px; }
+	.svg-whiteWhatsup-dims { width: 66px; height: 66px; }
+</style>
+
+<!--
+====================================================================================================
+-->
+
+	</head>
+	<body>
+		<header>
+			<h1>SVG stack preview</h1>
+			<p>This preview features an SVG stack. Please have a look at the HTML source for further details and be aware of the following constraints:</p>
+			<ul>
+				<li>Your browser has to <a href="http://caniuse.com/#feat=svg-fragment" target="_blank" rel="noopener noreferrer">support SVG fragment identifiers</a> for SVG stacks to work.</li>
+				<li>Support for SVG fragment identifiers hasn't always been that decent. For older browsers you will have to use some prolyfill like <a href="https://github.com/preciousforever/SVG-Stacker/blob/master/fixsvgstack.jquery.js" target="_blank" rel="noopener noreferrer">fixsvgstack.jquery.js</a>.</li>
+			</ul>
+		</header>
+		<section>
+
+<!--
+
+SVG stack
+====================================================================================================
+These SVG images make use of fragment identifiers (IDs) to reference certain portions of the
+external sprite. By default, all shapes inside the sprite are hidden by CSS. The `:target` pseudo
+selector is used to show the very shape that is referenced by the fragment identifier.
+
+-->
+
+			<ul>
+
+				<li title="barbell">
+					<div class="icon-box">
+
+						<!-- barbell -->
+						<img src="../icons/icons.svg#barbell" class="svg-barbell-dims" alt="barbell"/>
+
+					</div>
+					<h2>barbell</h2>
+				</li>
+				<li title="basket">
+					<div class="icon-box">
+
+						<!-- basket -->
+						<img src="../icons/icons.svg#basket" class="svg-basket-dims" alt="basket"/>
+
+					</div>
+					<h2>basket</h2>
+				</li>
+				<li title="broadcast">
+					<div class="icon-box">
+
+						<!-- broadcast -->
+						<img src="../icons/icons.svg#broadcast" class="svg-broadcast-dims" alt="broadcast"/>
+
+					</div>
+					<h2>broadcast</h2>
+				</li>
+				<li title="calendar">
+					<div class="icon-box">
+
+						<!-- calendar -->
+						<img src="../icons/icons.svg#calendar" class="svg-calendar-dims" alt="calendar"/>
+
+					</div>
+					<h2>calendar</h2>
+				</li>
+				<li title="chat">
+					<div class="icon-box">
+
+						<!-- chat -->
+						<img src="../icons/icons.svg#chat" class="svg-chat-dims" alt="chat"/>
+
+					</div>
+					<h2>chat</h2>
+				</li>
+				<li title="city">
+					<div class="icon-box">
+
+						<!-- city -->
+						<img src="../icons/icons.svg#city" class="svg-city-dims" alt="city"/>
+
+					</div>
+					<h2>city</h2>
+				</li>
+				<li title="clock">
+					<div class="icon-box">
+
+						<!-- clock -->
+						<img src="../icons/icons.svg#clock" class="svg-clock-dims" alt="clock"/>
+
+					</div>
+					<h2>clock</h2>
+				</li>
+				<li title="clockIcon">
+					<div class="icon-box">
+
+						<!-- clockIcon -->
+						<img src="../icons/icons.svg#clockIcon" class="svg-clockIcon-dims" alt="clockIcon"/>
+
+					</div>
+					<h2>clockIcon</h2>
+				</li>
+				<li title="downArrow">
+					<div class="icon-box">
+
+						<!-- downArrow -->
+						<img src="../icons/icons.svg#downArrow" class="svg-downArrow-dims" alt="downArrow"/>
+
+					</div>
+					<h2>downArrow</h2>
+				</li>
+				<li title="economy">
+					<div class="icon-box">
+
+						<!-- economy -->
+						<img src="../icons/icons.svg#economy" class="svg-economy-dims" alt="economy"/>
+
+					</div>
+					<h2>economy</h2>
+				</li>
+				<li title="emsPost">
+					<div class="icon-box">
+
+						<!-- emsPost -->
+						<img src="../icons/icons.svg#emsPost" class="svg-emsPost-dims" alt="emsPost"/>
+
+					</div>
+					<h2>emsPost</h2>
+				</li>
+				<li title="engFlag">
+					<div class="icon-box">
+
+						<!-- engFlag -->
+						<img src="../icons/icons.svg#engFlag" class="svg-engFlag-dims" alt="engFlag"/>
+
+					</div>
+					<h2>engFlag</h2>
+				</li>
+				<li title="fileText">
+					<div class="icon-box">
+
+						<!-- fileText -->
+						<img src="../icons/icons.svg#fileText" class="svg-fileText-dims" alt="fileText"/>
+
+					</div>
+					<h2>fileText</h2>
+				</li>
+				<li title="globe">
+					<div class="icon-box">
+
+						<!-- globe -->
+						<img src="../icons/icons.svg#globe" class="svg-globe-dims" alt="globe"/>
+
+					</div>
+					<h2>globe</h2>
+				</li>
+				<li title="info">
+					<div class="icon-box">
+
+						<!-- info -->
+						<img src="../icons/icons.svg#info" class="svg-info-dims" alt="info"/>
+
+					</div>
+					<h2>info</h2>
+				</li>
+				<li title="littlePackages">
+					<div class="icon-box">
+
+						<!-- littlePackages -->
+						<img src="../icons/icons.svg#littlePackages" class="svg-littlePackages-dims" alt="littlePackages"/>
+
+					</div>
+					<h2>littlePackages</h2>
+				</li>
+				<li title="mailIcon">
+					<div class="icon-box">
+
+						<!-- mailIcon -->
+						<img src="../icons/icons.svg#mailIcon" class="svg-mailIcon-dims" alt="mailIcon"/>
+
+					</div>
+					<h2>mailIcon</h2>
+				</li>
+				<li title="mainFeatureLogo">
+					<div class="icon-box">
+
+						<!-- mainFeatureLogo -->
+						<img src="../icons/icons.svg#mainFeatureLogo" class="svg-mainFeatureLogo-dims" alt="mainFeatureLogo"/>
+
+					</div>
+					<h2>mainFeatureLogo</h2>
+				</li>
+				<li title="navLogo">
+					<div class="icon-box">
+
+						<!-- navLogo -->
+						<img src="../icons/icons.svg#navLogo" class="svg-navLogo-dims" alt="navLogo"/>
+
+					</div>
+					<h2>navLogo</h2>
+				</li>
+				<li title="nextArrow">
+					<div class="icon-box">
+
+						<!-- nextArrow -->
+						<img src="../icons/icons.svg#nextArrow" class="svg-nextArrow-dims" alt="nextArrow"/>
+
+					</div>
+					<h2>nextArrow</h2>
+				</li>
+				<li title="notebook">
+					<div class="icon-box">
+
+						<!-- notebook -->
+						<img src="../icons/icons.svg#notebook" class="svg-notebook-dims" alt="notebook"/>
+
+					</div>
+					<h2>notebook</h2>
+				</li>
+				<li title="notification">
+					<div class="icon-box">
+
+						<!-- notification -->
+						<img src="../icons/icons.svg#notification" class="svg-notification-dims" alt="notification"/>
+
+					</div>
+					<h2>notification</h2>
+				</li>
+				<li title="operativeDelivery">
+					<div class="icon-box">
+
+						<!-- operativeDelivery -->
+						<img src="../icons/icons.svg#operativeDelivery" class="svg-operativeDelivery-dims" alt="operativeDelivery"/>
+
+					</div>
+					<h2>operativeDelivery</h2>
+				</li>
+				<li title="orderPPParallax">
+					<div class="icon-box">
+
+						<!-- orderPPParallax -->
+						<img src="../icons/icons.svg#orderPPParallax" class="svg-orderPPParallax-dims" alt="orderPPParallax"/>
+
+					</div>
+					<h2>orderPPParallax</h2>
+				</li>
+				<li title="orderRacet">
+					<div class="icon-box">
+
+						<!-- orderRacet -->
+						<img src="../icons/icons.svg#orderRacet" class="svg-orderRacet-dims" alt="orderRacet"/>
+
+					</div>
+					<h2>orderRacet</h2>
+				</li>
+				<li title="original">
+					<div class="icon-box">
+
+						<!-- original -->
+						<img src="../icons/icons.svg#original" class="svg-original-dims" alt="original"/>
+
+					</div>
+					<h2>original</h2>
+				</li>
+				<li title="pointOfExtradicion">
+					<div class="icon-box">
+
+						<!-- pointOfExtradicion -->
+						<img src="../icons/icons.svg#pointOfExtradicion" class="svg-pointOfExtradicion-dims" alt="pointOfExtradicion"/>
+
+					</div>
+					<h2>pointOfExtradicion</h2>
+				</li>
+				<li title="post">
+					<div class="icon-box">
+
+						<!-- post -->
+						<img src="../icons/icons.svg#post" class="svg-post-dims" alt="post"/>
+
+					</div>
+					<h2>post</h2>
+				</li>
+				<li title="pp1">
+					<div class="icon-box">
+
+						<!-- pp1 -->
+						<img src="../icons/icons.svg#pp1" class="svg-pp1-dims" alt="pp1"/>
+
+					</div>
+					<h2>pp1</h2>
+				</li>
+				<li title="pp2">
+					<div class="icon-box">
+
+						<!-- pp2 -->
+						<img src="../icons/icons.svg#pp2" class="svg-pp2-dims" alt="pp2"/>
+
+					</div>
+					<h2>pp2</h2>
+				</li>
+				<li title="pp3">
+					<div class="icon-box">
+
+						<!-- pp3 -->
+						<img src="../icons/icons.svg#pp3" class="svg-pp3-dims" alt="pp3"/>
+
+					</div>
+					<h2>pp3</h2>
+				</li>
+				<li title="pp4">
+					<div class="icon-box">
+
+						<!-- pp4 -->
+						<img src="../icons/icons.svg#pp4" class="svg-pp4-dims" alt="pp4"/>
+
+					</div>
+					<h2>pp4</h2>
+				</li>
+				<li title="pp5">
+					<div class="icon-box">
+
+						<!-- pp5 -->
+						<img src="../icons/icons.svg#pp5" class="svg-pp5-dims" alt="pp5"/>
+
+					</div>
+					<h2>pp5</h2>
+				</li>
+				<li title="prevArrow">
+					<div class="icon-box">
+
+						<!-- prevArrow -->
+						<img src="../icons/icons.svg#prevArrow" class="svg-prevArrow-dims" alt="prevArrow"/>
+
+					</div>
+					<h2>prevArrow</h2>
+				</li>
+				<li title="prodSelection">
+					<div class="icon-box">
+
+						<!-- prodSelection -->
+						<img src="../icons/icons.svg#prodSelection" class="svg-prodSelection-dims" alt="prodSelection"/>
+
+					</div>
+					<h2>prodSelection</h2>
+				</li>
+				<li title="rusFlag">
+					<div class="icon-box">
+
+						<!-- rusFlag -->
+						<img src="../icons/icons.svg#rusFlag" class="svg-rusFlag-dims" alt="rusFlag"/>
+
+					</div>
+					<h2>rusFlag</h2>
+				</li>
+				<li title="searchIcon">
+					<div class="icon-box">
+
+						<!-- searchIcon -->
+						<img src="../icons/icons.svg#searchIcon" class="svg-searchIcon-dims" alt="searchIcon"/>
+
+					</div>
+					<h2>searchIcon</h2>
+				</li>
+				<li title="sliderAccessories">
+					<div class="icon-box">
+
+						<!-- sliderAccessories -->
+						<img src="../icons/icons.svg#sliderAccessories" class="svg-sliderAccessories-dims" alt="sliderAccessories"/>
+
+					</div>
+					<h2>sliderAccessories</h2>
+				</li>
+				<li title="sliderClothes">
+					<div class="icon-box">
+
+						<!-- sliderClothes -->
+						<img src="../icons/icons.svg#sliderClothes" class="svg-sliderClothes-dims" alt="sliderClothes"/>
+
+					</div>
+					<h2>sliderClothes</h2>
+				</li>
+				<li title="sliderCosmetics">
+					<div class="icon-box">
+
+						<!-- sliderCosmetics -->
+						<img src="../icons/icons.svg#sliderCosmetics" class="svg-sliderCosmetics-dims" alt="sliderCosmetics"/>
+
+					</div>
+					<h2>sliderCosmetics</h2>
+				</li>
+				<li title="sliderElectronics">
+					<div class="icon-box">
+
+						<!-- sliderElectronics -->
+						<img src="../icons/icons.svg#sliderElectronics" class="svg-sliderElectronics-dims" alt="sliderElectronics"/>
+
+					</div>
+					<h2>sliderElectronics</h2>
+				</li>
+				<li title="sliderForChild">
+					<div class="icon-box">
+
+						<!-- sliderForChild -->
+						<img src="../icons/icons.svg#sliderForChild" class="svg-sliderForChild-dims" alt="sliderForChild"/>
+
+					</div>
+					<h2>sliderForChild</h2>
+				</li>
+				<li title="sliderSport">
+					<div class="icon-box">
+
+						<!-- sliderSport -->
+						<img src="../icons/icons.svg#sliderSport" class="svg-sliderSport-dims" alt="sliderSport"/>
+
+					</div>
+					<h2>sliderSport</h2>
+				</li>
+				<li title="star">
+					<div class="icon-box">
+
+						<!-- star -->
+						<img src="../icons/icons.svg#star" class="svg-star-dims" alt="star"/>
+
+					</div>
+					<h2>star</h2>
+				</li>
+				<li title="stock">
+					<div class="icon-box">
+
+						<!-- stock -->
+						<img src="../icons/icons.svg#stock" class="svg-stock-dims" alt="stock"/>
+
+					</div>
+					<h2>stock</h2>
+				</li>
+				<li title="userLogo">
+					<div class="icon-box">
+
+						<!-- userLogo -->
+						<img src="../icons/icons.svg#userLogo" class="svg-userLogo-dims" alt="userLogo"/>
+
+					</div>
+					<h2>userLogo</h2>
+				</li>
+				<li title="viber">
+					<div class="icon-box">
+
+						<!-- viber -->
+						<img src="../icons/icons.svg#viber" class="svg-viber-dims" alt="viber"/>
+
+					</div>
+					<h2>viber</h2>
+				</li>
+				<li title="virtualTour">
+					<div class="icon-box">
+
+						<!-- virtualTour -->
+						<img src="../icons/icons.svg#virtualTour" class="svg-virtualTour-dims" alt="virtualTour"/>
+
+					</div>
+					<h2>virtualTour</h2>
+				</li>
+				<li title="whatsup">
+					<div class="icon-box">
+
+						<!-- whatsup -->
+						<img src="../icons/icons.svg#whatsup" class="svg-whatsup-dims" alt="whatsup"/>
+
+					</div>
+					<h2>whatsup</h2>
+				</li>
+				<li title="whiteChat">
+					<div class="icon-box">
+
+						<!-- whiteChat -->
+						<img src="../icons/icons.svg#whiteChat" class="svg-whiteChat-dims" alt="whiteChat"/>
+
+					</div>
+					<h2>whiteChat</h2>
+				</li>
+				<li title="whiteViber">
+					<div class="icon-box">
+
+						<!-- whiteViber -->
+						<img src="../icons/icons.svg#whiteViber" class="svg-whiteViber-dims" alt="whiteViber"/>
+
+					</div>
+					<h2>whiteViber</h2>
+				</li>
+				<li title="whiteWhatsup">
+					<div class="icon-box">
+
+						<!-- whiteWhatsup -->
+						<img src="../icons/icons.svg#whiteWhatsup" class="svg-whiteWhatsup-dims" alt="whiteWhatsup"/>
+
+					</div>
+					<h2>whiteWhatsup</h2>
+				</li>
+			</ul>
+
+<!--
+====================================================================================================
+-->
+
+		</section>
+		<footer>
+			<p>Generated at Fri, 18 Nov 2022 13:40:53 GMT by <a href="https://github.com/svg-sprite/svg-sprite" target="_blank" rel="noopener noreferrer">svg-sprite</a>.</p>
+		</footer>
+	</body>
+</html>
